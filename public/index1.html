@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alumni Portal</title>
+</head>
+<body>
+  <h1>Alumni Registration</h1>
+  <form>
+    <input type="text" name="name" placeholder="Full Name" required /><br/>
+    <input type="email" name="email" placeholder="Email" required /><br/>
+    <input type="number" name="graduationYear" placeholder="Graduation Year" required /><br/>
+    <input type="text" name="department" placeholder="Department" required /><br/>
+    <textarea name="message" placeholder="Message or Memory"></textarea><br/>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/api/alumni', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          alert('Submission successful!');
+          this.reset();
+        } else {
+          const error = await response.json();
+          alert('Error: ' + error.error);
+        }
+      } catch (err) {
+        alert('Submission failed. Please try again.');
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
