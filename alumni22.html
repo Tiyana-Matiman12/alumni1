@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSIT Kanpur - Alumni Network</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Header styles */
+        header {
+            background: linear-gradient(135deg, #5883ae, #004080);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 80px;
+            margin-right: 10px;
+            width:80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        .user-menu {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .user-menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            min-width: 200px;
+            z-index: 10;
+        }
+        
+        .user-menu:hover .user-menu-content {
+            display: block;
+        }
+        
+        .user-menu-content a {
+            display: block;
+            color: #333;
+            padding: 10px 15px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .user-menu-content a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .login-btn {
+            background-color: #ff9800;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #e68a00;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: url("psitmain11.webp") center/cover;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 51, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff9800;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e68a00;
+        }
+        
+        /* Main content sections */
+        .section {
+            padding: 4rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #003366;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #ff9800;
+        }
+        
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, #003366, #004080);
+            color: rgb(7, 7, 7);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-card {
+            padding: 2rem;
+        }
+        
+        .stat-card h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #ff9800;
+        }
+        
+        .stat-card p {
+            font-size: 1.2rem;
+        }
+        
+        /* Directory section */
+        .directory {
+            background-color: white;
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background-color: #f1f1f1;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .filter-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .search-box button {
+            padding: 0.8rem 1.5rem;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-box button:hover {
+            background-color: #00264d;
+        }
+        
+        .alumni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .alumni-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .alumni-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .alumni-header {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+        }
+        #alumni-image
+        {
+    width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #333; /* optional border */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+        }
+        .alumni-header {
+            display: flex;
+            align-items: center;
+            gap: 25px; /* spacing between image and name */
+            margin-bottom: 15px;
+          }
+          
+          .story-photo {
+            width: 200px;   /* bigger size */
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid #333; /* optional border */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            object-fit: cover;       /* ensures full coverage without distortion */
+            object-position: center 10%;
+          }
+          
+          .alumni-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+          
+          
+          .alumni-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* use 50%, not 150% */
+            overflow: hidden;
+            margin-right: 1rem;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          .alumni-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;       /* ensures full coverage without distortion */
+            object-position: center 20%; /* centers the face */
+            border-radius: 50%;      /* ensures image itself is circular */
+          }
+          
+        #alumni-matiman
+        {
+
+            width: 100%;
+            height: 100%;
+            object-fit: cover;       /* ensures full coverage without distortion */
+            object-position: center 60%; /* centers the face */
+            border-radius: 50%;
+        }
+        #alumni-sneha
+        {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;       /* ensures full coverage without distortion */
+            object-position: center 20%; /* centers the face */
+            border-radius: 50%;
+        }
+        .alumni-name h3 
+        {
+            margin: 0;
+            color: #003366;
+        }
+        
+        .alumni-batch {
+            color: #ff9800;
+            font-weight: bold;
+        }
+        
+        .alumni-info {
+            padding: 1.5rem;
+        }
+        
+        .alumni-info p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .alumni-info strong {
+            color: #003366;
+        }
+        
+        .alumni-connect {
+            display: flex;
+            border-top: 1px solid #eee;
+            padding: 1rem;
+        }
+        
+        .alumni-connect a {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem;
+            color: #003366;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .alumni-connect a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 4px;
+            background-color: white;
+            color: #003366;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        
+        .pagination a.active {
+            background-color: #003366;
+            color: white;
+        }
+        
+        .pagination a:hover:not(.active) {
+            background-color: #f1f1f1;
+        }
+        
+        /* Opportunities section */
+        .opportunities {
+            background-color: #f9f9f9;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab-btn {
+            padding: 1rem 2rem;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: #003366;
+            border-bottom: 3px solid #ff9800;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            color: #004d99;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .opportunity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .opportunity-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .opportunity-header {
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .opportunity-header h3 {
+            margin: 0;
+            color: #003366;
+        }
+        
+        .opportunity-company {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .opportunity-body {
+            padding: 1.5rem;
+        }
+        
+        .opportunity-detail {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+        
+        .detail-label {
+            width: 120px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .opportunity-footer {
+            padding: 1rem 1.5rem;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .opportunity-posted {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Success Stories */
+        .stories {
+            background-color: white;
+        }
+        
+        .story-list {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 2rem;
+            padding-bottom: 2rem;
+        }
+        
+        .story-card {
+            min-width: 300px;
+            max-width: 350px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .story-header {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .story-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            background-color: #ddd;
+        }
+        
+        .story-name {
+            color: #003366;
+            margin-bottom: 0.25rem;
+        }
+        
+        .story-title {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .story-content {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .story-quote {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        
+        .story-career p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Login Modal */
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.container{
+    background-color: #ffffff;
+    border-radius: 0px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.container p{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+.container span{
+    font-size: 12px;
+    color: #333;
+}
+
+.container a{
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.container button{
+    background-color: #e67710e4;
+    color: #110101;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.container button.hidden{
+    background-color: transparent;
+    border-color: #ffffff;
+}
+
+.container form{
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.container input{
+    background-color: #76a7f6;
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    right: 50%;
+    width: 50%;
+}
+
+.container.active .sign-in{
+    transform: translateX(100%);
+    opacity: 1;
+}
+
+.sign-up{
+    left: 50%;
+    width: 50%;
+
+}
+
+.container.active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.social-icons{
+    margin: 20px 0;
+}
+
+.social-icons a{
+    border: 10px solid #24229e;
+    border-radius: 200%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+}
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #003366, #004080);
+            color: white;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info h3, .contact-form h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-form .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-form .form-group input, .contact-form .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 4px;
+            border: none;
+        }
+        
+        .contact-form .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: #e68a00;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #002147;
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: #ff9800;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #ff9800;
+        }
+        
+        .copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        /* JS Functionality */
+        .js-show {
+            display: block !important;
+        }
+        
+        /* Detail Popup Styles */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .detail-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 8px;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .detail-header {
+            background: linear-gradient(135deg, #003366, #004080);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+        
+        .detail-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .detail-header p {
+            margin: 0.5rem 0 0;
+            opacity: 0.9;
+        }
+        
+        .detail-body {
+            padding: 2rem;
+        }
+        
+        .detail-section {
+            margin-bottom: 2rem;
+        }
+        
+        .detail-section h3 {
+            color: #003366;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-section p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .detail-section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            text-align: center;
+            line-height: 32px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .detail-close:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .detail-apply {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        
+        .detail-apply button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .detail-apply .primary-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        .detail-apply .primary-btn:hover {
+            background-color: #e68a00;
+        }
+        
+        .detail-apply .secondary-btn {
+            background-color: transparent;
+            border: 1px solid #003366;
+            color: #003366;
+        }
+        
+        .detail-apply .secondary-btn:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .detail-contact {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .detail-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ff9800;
+            z-index: 1;
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: -1.95rem;
+            top: 1rem;
+            width: 2px;
+            height: 100%;
+            background-color: #ddd;
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-content h4 {
+            margin: 0 0 0.5rem;
+            color: #003366;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .detail-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .detail-card h4 {
+            margin: 0 0 1rem;
+            color: #003366;
+        }
+        
+        .success-story-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .story-large-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #eee;
+        }
+        
+        .story-large-details {
+            flex: 1;
+        }
+        
+        .story-large-details h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.8rem;
+            color: #003366;
+        }
+        
+        .story-current {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .story-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .story-stat {
+            padding: 0.5rem 1rem;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            color: #333;
+        }
+        
+        .advice-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .advice-section h3 {
+            margin: 0 0 1rem;
+            color: #003366;
+        }
+        
+        .advice-section p {
+            font-style: italic;
+            color: #555;
+        }
+        .rcep{
+            text-size-adjust: 70px;
+            color: #002147;
+        }
+        .detail{
+            color: #e68a00;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="gradsphere1.jpg" alt="PSIT Logo"> GradSphere
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#directory">Alumni Directory</a></li>
+                    <li><a href="#opportunities">Opportunities</a></li>
+                    <li><a href="#stories">Success Stories</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#login" class="login-btn" id="loginBtn">Login / Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>GradSphere</h1>
+            <p>Connecting across generations of Pranveer Singh Institute of Technology</p>
+            <a href="#directory" class="btn">Explore Network</a>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>12,000+</h3>
+                    <p>Alumni</p>
+                </div>
+                <div class="stat-card">
+                    <h3>20+</h3>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-card">
+                    <h3>500+</h3>
+                    <p>Companies Connected</p>
+                </div>
+                <div class="stat-card">
+                    <h3>1000+</h3>
+                    <p>Active Members</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Directory Section -->
+    <section id="directory" class="section directory">
+        <div class="container">
+            <div class="section-title">
+                <h2>Alumni Directory</h2>
+            </div>
+            
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label for="batchFilter">Batch Year</label>
+                    <select id="batchFilter">
+                        <option value="">All Years</option>
+                        <option value="2025">2025 (Current 4th Year)</option>
+                        <option value="2026">2026 (Current 3rd Year)</option>
+                        <option value="2027">2027 (Current 2nd Year)</option>
+                        <option value="2028">2028 (Current 1st Year)</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="older">2019 & Before</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="branchFilter">Branch</label>
+                    <select id="branchFilter">
+                        <option value="">All Branches</option>
+                        <option value="cse">Computer Science & Engineering</option>
+                        <option value="it">Information Technology</option>
+                        <option value="ece">Electronics & Communication</option>
+                        <option value="ee">Electrical Engineering</option>
+                        <option value="me">Mechanical Engineering</option>
+                        <option value="ce">Civil Engineering</option>
+                        <option value="mba">MBA</option>
+                        <option value="mca">MCA</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search by name, company, role...">
+                    <button>Search</button>
+                </div>
+            </div>
+            
+            <div class="alumni-grid">
+                <!-- Alumni Card 1 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="sneha2.jpg" alt="Alumni Photo" id="alumni-sneha">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Sneha Prajapati</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><strong>Current Role:</strong> Software Engineer</p>
+                        <p><strong>Company:</strong> Warner Bros. Discovery</p>
+                        <p><strong>Experience:</strong> 2022-Present</p>
+                        <p><strong>Package:</strong> ₹13 LPA</p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Messsage.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+
+                <!-- Alumni Card 2 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="yashsvi2.jpg" alt="Alumni Photo">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Yashvi Srivastava</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><strong>Current Role:</strong> Associate Consultant</p>
+                        <p><strong>Company:</strong> Capgemini</p>
+                        <p><strong>Experience:</strong>2021-Present</p>
+                        <p><strong>Package:</strong> ₹11 LPA</p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Messsage.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Alumni Card 3 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="matiman2.jpg" alt="Alumni Photo" id="alumni-matiman">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Mitushi Matiman</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><strong>Current Role:</strong> Java Developer</p>
+                        <p><strong>Company:</strong> TATA Consultancy Services</p>
+                        <p><strong>Experience:</strong> 2023-Present</p>
+                        <p><strong>Package:</strong> ₹12 LPA</p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Messsage.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+            
+                <!-- Alumni Card 4 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="garima2.jpg" alt="Alumni Photo">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Garima Bajpai</h3>
+                            <div class="alumni-batch">CS, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><strong>Current Role:</strong> System Engineer</p>
+                        <p><strong>Company:</strong> TATA Consultancy Services</p>
+                        <p><strong>Experience:</strong> 2024-Present</p>
+                        <p><strong>Package:</strong> ₹8 LPA</p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Messsage.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                            
+                <!-- Alumni Card 5 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="harsha2.jpg" alt="Alumni Photo" >
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Harsha Gupta</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><strong>Current Role:</strong> Insurance Broker</p>
+                        <p><strong>Company:</strong> RATESDOTCA Group Ltd.</p>
+                        <p><strong>Experience:</strong> 2024-Present</p>
+                        <p><strong>Package:</strong> ₹10 LPA</p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Messsage.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+       
+                <!-- Alumni Card 6 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="shubham2.jpg" alt="Alumni Photo">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Shubham Chopra</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><strong>Current Role:</strong> Senior Software Engineer</p>
+                        <p><strong>Company:</strong> HCAH India</p>
+                        <p><strong>Experience:</strong> 2024-Present</p>
+                        <p><strong>Package:</strong> ₹11 LPA</p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Messsage.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                <!-- More alumni cards would go here -->
+            </div>
+            
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Opportunities Section -->
+    <section id="opportunities" class="section opportunities">
+        <div class="container">
+            <div class="section-title">
+                <h2>Opportunities</h2>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="jobs">Job Openings</button>
+                <button class="tab-btn" data-tab="internships">Internships</button>
+                <button class="tab-btn" data-tab="referrals">Referrals</button>
+                <button class="tab-btn" data-tab="mentorship">Mentorship</button>
+            </div>
+            
+            <div id="jobs" class="tab-content active">
+                <div class="opportunity-list">
+                    <!-- Job 1 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Senior Software Engineer</h3>
+                            <div class="opportunity-company">Google India - Bangalore</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Experience:</div>
+                                <div class="detail-value">3-5 years</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Skills:</div>
+                                <div class="detail-value">Java, Python, Cloud Computing, Machine Learning</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Package:</div>
+                                <div class="detail-value">₹25-40 LPA</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Posted By:</div>
+                                <div class="detail-value">Rahul Sharma (CSE, 2020)</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 3 days ago</div>
+                            <a href="#" class="btn" onclick="showJobDetails('google-sde')">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Job 2 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Product Manager</h3>
+                            <div class="opportunity-company">Microsoft - Hyderabad</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Experience:</div>
+                                <div class="detail-value">2-4 years</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Skills:</div>
+                                <div class="detail-value">Product Development, Agile, Technical Background</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Package:</div>
+                                <div class="detail-value">₹20-30 LPA</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Posted By:</div>
+                                <div class="detail-value">Priya Singh (ECE, 2021)</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 1 week ago</div>
+                            <a href="#" class="btn" onclick="showJobDetails('microsoft-pm')">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Job 3 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Data Scientist</h3>
+                            <div class="opportunity-company">Amazon - Pune</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Experience:</div>
+                                <div class="detail-value">1-3 years</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Skills:</div>
+                                <div class="detail-value">Python, R, SQL, Machine Learning, Deep Learning</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Package:</div>
+                                <div class="detail-value">₹18-25 LPA</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Posted By:</div>
+                                <div class="detail-value">Neha Gupta (CSE, 2022)</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 5 days ago</div>
+                            <a href="#" class="btn" onclick="showJobDetails('amazon-ds')">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="internships" class="tab-content">
+                <div class="opportunity-list">
+                    <!-- Internship 1 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Software Engineering Intern</h3>
+                            <div class="opportunity-company">Flipkart - Bangalore</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Duration:</div>
+                                <div class="detail-value">3 months (May-Jul 2025)</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">For:</div>
+                                <div class="detail-value">Current 3rd year students</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Stipend:</div>
+                                <div class="detail-value">₹40,000 per month</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Posted By:</div>
+                                <div class="detail-value">Amit Kumar (CSE, 2023)</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 2 days ago</div>
+                            <a href="#" class="btn" onclick="showInternshipDetails('flipkart-sde')">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Internship 2 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Data Analytics Intern</h3>
+                            <div class="opportunity-company">Paytm - Noida</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Duration:</div>
+                                <div class="detail-value">6 months (Jan-Jun 2025)</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">For:</div>
+                                <div class="detail-value">Current 4th year students</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Stipend:</div>
+                                <div class="detail-value">₹25,000 per month</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Posted By:</div>
+                                <div class="detail-value">Kavita Singh (ECE, 2022)</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 1 week ago</div>
+                            <a href="#" class="btn" onclick="showInternshipDetails('paytm-data')">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Internship 3 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Product Design Intern</h3>
+                            <div class="opportunity-company">Zomato - Delhi</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Duration:</div>
+                                <div class="detail-value">2 months (Jun-Jul 2025)</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">For:</div>
+                                <div class="detail-value">Current 2nd & 3rd year students</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Stipend:</div>
+                                <div class="detail-value">₹20,000 per month</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Posted By:</div>
+                                <div class="detail-value">Rohit Sharma (ME, 2021)</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 3 days ago</div>
+                            <a href="#" class="btn" onclick="showInternshipDetails('zomato-design')">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="referrals" class="tab-content">
+                <div class="opportunity-list">
+                    <!-- Referral 1 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Backend Developer</h3>
+                            <div class="opportunity-company">Infosys - Pune</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Experience:</div>
+                                <div class="detail-value">1-3 years</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Skills:</div>
+                                <div class="detail-value">Node.js, MongoDB, AWS</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Referrer:</div>
+                                <div class="detail-value">Vishal Gupta (CSE, 2020)</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Process:</div>
+                                <div class="detail-value">Submit resume and get direct referral</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 4 days ago</div>
+                            <a href="#" class="btn" onclick="showReferralDetails('infosys-backend')">Request Referral</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Referral 2 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>UX Designer</h3>
+                            <div class="opportunity-company">TCS - Mumbai</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Experience:</div>
+                                <div class="detail-value">0-2 years</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Skills:</div>
+                                <div class="detail-value">Figma, UI/UX, User Research</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Referrer:</div>
+                                <div class="detail-value">Anjali Patel (CSE, 2022)</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Process:</div>
+                                <div class="detail-value">Share portfolio and resume</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Posted 1 week ago</div>
+                            <a href="#" class="btn" onclick="showReferralDetails('tcs-ux')">Request Referral</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="mentorship" class="tab-content">
+                <div class="opportunity-list">
+                    <!-- Mentor 1 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Career Guidance in Software Development</h3>
+                            <div class="opportunity-company">By Rahul Sharma (Google)</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Focus Areas:</div>
+                                <div class="detail-value">Interview Preparation, Career Path Planning</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">For:</div>
+                                <div class="detail-value">Final year CSE/IT students</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Session Type:</div>
+                                <div class="detail-value">Monthly group calls + individual sessions</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Duration:</div>
+                                <div class="detail-value">3 months program</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Batch starting June 1, 2025</div>
+                            <a href="#" class="btn" onclick="showMentorshipDetails('rahul-program')">Apply for Mentorship</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mentor 2 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-header">
+                            <h3>Data Science Career Guidance</h3>
+                            <div class="opportunity-company">By Neha Gupta (Flipkart)</div>
+                        </div>
+                        <div class="opportunity-body">
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Focus Areas:</div>
+                                <div class="detail-value">Data Projects, ML Skills, Analytics Career</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">For:</div>
+                                <div class="detail-value">3rd & 4th year students</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Session Type:</div>
+                                <div class="detail-value">Weekly project guidance + bi-weekly calls</div>
+                            </div>
+                            <div class="opportunity-detail">
+                                <div class="detail-label">Duration:</div>
+                                <div class="detail-value">4 months program</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-footer">
+                            <div class="opportunity-posted">Batch starting May 15, 2025</div>
+                            <a href="#" class="btn" onclick="showMentorshipDetails('neha-program')">Apply for Mentorship</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Success Stories Section -->
+    <section id="stories" class="section stories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+            </div>
+            
+            <div class="story-list">
+                <!-- Story 1 -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-photo">
+                            <img src="harsha2.jpg" alt="Alumni Photo" id="alumni-image">
+                        </div>
+                        <h3 class="story-name">Harsha Gupta</h3>
+                        <div class="story-title">Insurance Broker, RATESDOTCA Group Ltd.</div>
+                    </div>
+                    <div class="story-content">
+                        <p class="story-quote">"PSIT gave me the foundation I needed to excel in the tech industry. But without the help of friendly seniors, it would have been little bit difficult to crack a route on how to approach towards the position I am at today."</p>
+                        <div class="story-career">
+                            <p><strong>Batch:</strong> IT 2020</p>
+                            <p><strong>Career Path:</strong> TATA Consultancy Services → RATESDOTCA Group Ltd.</p>
+                            <p><strong>Package Growth:</strong> ₹7 LPA → ₹10</p>
+                        </div>
+                        <a href="#" class="btn" style="margin-top: 1rem;" onclick="showSuccessStoryDetails('rahul-story')">Read Full Story</a>
+                    </div>
+                </div>
+                
+                <!-- Story 2 -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-photo">
+                            <img src="shubham2.jpg" alt="Alumni Photo" id="alumni-image">
+                        </div>
+                        <h3 class="story-name">Shubham Chopra</h3>
+                        <div class="story-title">Senior Software Engineer, HCAH India</div>
+                    </div>
+                    <div class="story-content">
+                        <p class="story-quote">"The project-based learning at PSIT taught me how to solve real-world problems, which is exactly what I do every day in my role. Thanks to all the professors and seniors who played a secondary lead in my success story."</p>
+                        <div class="story-career">
+                            <p><strong>Batch:</strong> IT 2020</p>
+                            <p><strong>Career Path:</strong> Infosys → HCAH India</p>
+                            <p><strong>Package Growth:</strong> ₹9 LPA → ₹11 LPA</p>
+                        </div>
+                        <a href="#" class="btn" style="margin-top: 1rem;" onclick="showSuccessStoryDetails('priya-story')">Read Full Story</a>
+                    </div>
+                </div>
+                
+                <!-- Story 3 -->
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-photo">
+                            <img src="sneha2.jpg" alt="Alumni Photo" id="alumni-image">
+                        </div>
+                        <h3 class="story-name">Sneha Prajapati</h3>
+                        <div class="story-title">Software Engineer, Warner Bros. Discovery</div>
+                    </div>
+                    <div class="story-content">
+                        <p class="story-quote">"My professors at PSIT mentored me beyond academics, helping me develop leadership skills that have been crucial in my career growth. And seniors too played a prominent role in my success. They informed me of various opportunities like hackathons and few online courses which can help me get a good placement."</p>
+                        <div class="story-career">
+                            <p><strong>Batch:</strong> IT 2020</p>
+                            <p><strong>Career Path:</strong> Capgemini → Warner Bros. Discovery</p>
+                            <p><strong>Package Growth:</strong> ₹10 LPA → ₹13 LPA</p>
+                        </div>
+                        <a href="#" class="btn" style="margin-top: 1rem;" onclick="showSuccessStoryDetails('vikram-story')">Read Full Story</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: #ddd;">Top Rated Saarthis</h2>
+            </div>
+                
+                <!-- Alumni Card 1 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="harsha2.jpg" alt="Alumni Photo" class="alumni-img">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Harsha Gupta</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><role class="rcep">Current Role: </role><detail style="color: grey;">Insurance Broker</detail></p>
+                        <p><company class="rcep">Company:</company><detail style="color: grey;">RATESDOTCA Group Ltd.</detail></p>
+                        <p><experience class="rcep">Experience:</experience><detail style="color: grey;">2024-Present</detail></p>
+                        <p><package class="rcep">Package:</package><detail style="color: grey;">₹10 LPA</detail></p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Message.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Alumni Card 2 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="matiman2.jpg" alt="Alumni Photo" class="alumni-img" id="alumni-matiman">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Mitushi Matiman</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><role class="rcep">Current Role: </role><detail style="color: grey;">Java Developer</detail></p>
+                        <p><company class="rcep">Company: </company><detail style="color: grey;">Tata Consultancy Services</detail></p>
+                        <p><experience class="rcep">Experience: </experience><detail style="color: grey;">2023-Present</detail></p>
+                        <p><package class="rcep">Package: </package><detail style="color: grey;">₹12 LPA</detail></p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Message.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Alumni Card 3 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="garima2.jpg" alt="Alumni Photo" class="alumni-img">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Garima Bajpai</h3>
+                            <div class="alumni-batch">CS, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><role class="rcep">Current Role: </role><detail style="color: grey;">System Engineer</detail></p>
+                        <p><company class="rcep">Company: </company><detail style="color: grey;">Tata Consultancy Services</detail></p>
+                        <p><experience class="rcep">Experience: </experience><detail style="color: grey;">2024-Present</detail></p>
+                        <p><package class="rcep">Package: </package><detail style="color: grey;">₹8 LPA</detail></p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Message.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Alumni Card 4 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="yashsvi2.jpg" alt="Alumni Photo" class="alumni-img">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Yashvi Srivastava</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><role class="rcep">Current Role: </role><detail style="color: grey;">Associate Consultant</detail></p>
+                        <p><company class="rcep">Company: </company><detail style="color: grey;">Capgemini</detail></p>
+                        <p><experience class="rcep">Experience: </experience><detail style="color: grey;">2023-Present</detail></p>
+                        <p><package class="rcep">Package: </package><detail style="color: grey;">₹11 LPA</detail></p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Message.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Alumni Card 5 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="shubham2.jpg" alt="Alumni Photo" class="alumni-img">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Shubham Chopra</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><role class="rcep">Current Role: </role><detail style="color: grey;">Senior Software Engineer</detail></p>
+                        <p><company class="rcep">Company: </company><detail style="color: grey;">HCAH India</detail></p>
+                        <p><experience class="rcep">Experience: </experience><detail style="color: grey;">2023-Present</detail></p>
+                        <p><package class="rcep">Package: </package><detail style="color: grey;">₹11 LPA</detail></p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Message.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Alumni Card 6 -->
+                <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-photo">
+                            <img src="sneha2.jpg" alt="Alumni Photo" class="alumni-img" id="alumni-sneha">
+                        </div>
+                        <div class="alumni-name">
+                            <h3>Sneha Prajapati</h3>
+                            <div class="alumni-batch">IT, Batch of 2020</div>
+                        </div>
+                    </div>
+                    <div class="alumni-info">
+                        <p><role class="rcep">Current Role: </role><detail style="color: grey;">Software Engineer</detail></p>
+                        <p><company class="rcep">Company: </company><detail style="color: grey;">Warner Bros. Discovery</detail></p>
+                        <p><experience class="rcep">Experience: </experience><detail style="color: grey;">2022-Present</detail></p>
+                        <p><package class="rcep">Package: </package><detail style="color: grey;">₹13 LPA</detail></p>
+                    </div>
+                    <div class="alumni-connect">
+                        <a href="Message.html">Message</a>
+                        <a href="Connect.html">Connect</a>
+                        <a href="Profile.html">View Profile</a>
+                    </div>
+
+                 <!--Login/Register-->
+                 <section id="login" class="Login/Register">
+                    <div class="container">
+                        <div class="section-title">
+                            <h2>Login/Register</h2>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+<body>
+<div class="container" id="container">
+  <div class="form-container sign-up">
+    <form>
+        
+        <h2> Register Yourself</h2>
+      <div class="social-icons">
+        <a href="#" class="icon"
+          ><i class="fa-brands fa-google-plus-g"></i
+        ></a>
+        <a href="#" class="icon"
+          ><i class="fa-brands fa-linkedin-in"></i
+        ></a>
+      </div>
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="AKTU ROLL" />
+      <span>(use your college or aktu id only*)</span>
+      <input type="password" placeholder="Password" />
+      <button>Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in">
+    <form>
+      <h2>Sign In</h2>
+      <div class="social-icons">
+        <a href="#" class="icon"
+          ><i class="fa-brands fa-google-plus-g"></i
+        ></a>
+        <a href="#" class="icon"
+          ><i class="fa-brands fa-linkedin-in"></i
+        ></a>
+      </div>
+      <input type="id" placeholder="AKTU ROLL" />
+      <input type="password" placeholder="Password" />
+      <br>
+      <a href="#www.gmail.com">Forget Your Password?</a>
+      <button>Sign In</button>
+    </form>
+  </div>
+        <button class="hidden" id="login">Sign In</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<link     rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+
+<script src="script.js"></script>
+</body>
+</html>
